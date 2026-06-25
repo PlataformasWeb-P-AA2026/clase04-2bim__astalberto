@@ -11,6 +11,9 @@ class Estudiante(models.Model):
         return "%s %s %s" % (self.nombre, 
                 self.apellido,
                 self.cedula)
+    
+    def obtenerNumTelefonicos(self):
+        return self.numeros_telefonicos.count()    
 
 class NumeroTelefonico(models.Model):
     telefono = models.CharField(max_length=100)
@@ -20,4 +23,14 @@ class NumeroTelefonico(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.telefono, self.tipo)
+    
+    def obtenerOperadora(self):
+        if self.telefono[0:3] == "099":
+            return "Claro"
+        elif self.telefono[0:3] == "098":
+            return "Movistar"
+        else:
+            return "Convenional" 
+    
+
 
