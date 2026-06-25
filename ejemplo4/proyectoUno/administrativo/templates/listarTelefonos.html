@@ -15,19 +15,19 @@ Listado de Telefonos
             <th>Telefono</th>
             <th>Tipo</th>
             <th>Operadora</th>
-            <th>Crear</th>
+            <th>Editar</th>
         </tr>
     </thead>
 
     {% for t in numeroTelefonico %}
     <tr>
-        <td> {{t.estudiante.nombre}} </td>
+        <td> {{t.estudiante.nombre}} {{t.estudiante.apellido}} </td>
         <td> {{t.telefono}} </td>
         <td> {{t.tipo}} </td>
         <td> {{t.obtenerOperadora}} </td>
         <td>
-            [<a href="{% url 'crear_numero_telefonico' %}" onclick="return confirm('¿Está seguro de la eliminación?')">
-                Crear Numero Telefonico</a>]
+            [<a href="{% url 'editar_numero_telefonico' t.id    %}" >
+                Editar</a>]
         </td>
     </tr>
     {% endfor %}
