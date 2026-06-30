@@ -17,6 +17,8 @@ urlpatterns = [
          name='crear_chef'),
         path('crear/plato', views.crear_plato,
          name='crear_plato'),
+        path('crear/mensaje', views.crear_mensaje,
+         name='crear_mensaje'),
 
         path('editar/restaurante/<int:id>', views.editar_restaurante,
             name='editar_restaurante'),

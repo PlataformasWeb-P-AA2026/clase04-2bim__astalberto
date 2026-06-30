@@ -1,6 +1,6 @@
 from django.contrib import admin
 # Importar las clases del modelo
-from negocio.models import Restaurante, Chef, Plato
+from negocio.models import Restaurante, Chef, Plato, Mensaje
 
 class RestauranteAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'tipo_cocina', 'capacidad_meses')
@@ -21,3 +21,7 @@ class PlatoAdmin(admin.ModelAdmin):
 
 admin.site.register(Plato, PlatoAdmin)
 
+class MensajeAdmin(admin.ModelAdmin):
+    list_display = ['usuario', 'mensaje']
+
+admin.site.register(Mensaje, MensajeAdmin)

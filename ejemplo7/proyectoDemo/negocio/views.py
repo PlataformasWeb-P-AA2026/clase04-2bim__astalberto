@@ -8,10 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 # importar las clases de models.py
-from negocio.models import Chef, Plato, Restaurante
+from negocio.models import Chef, Plato, Restaurante, Mensaje
 
 # importar los formularios de forms.py
-from negocio.forms import RestauranteForm, ChefForm, PlatoForm
+from negocio.forms import RestauranteForm, ChefForm, PlatoForm, MensajeForm
 
 def ingreso(request):
 
@@ -151,3 +151,20 @@ def ver_plato(request, id):
     informacion_template = {'objeto': plato}
     return render(request, 'ver_plato.html',
                   informacion_template)
+
+@login_required(login_url='/entrando/login/')
+def crear_mensaje(request):
+    """
+    """
+    if request.method=='POST':
+        formulario = MensajeForm(request.POST)
+        print(formulario.errors)
+        if formulario.is_valid():
+            mensaje = formulario.save(commit=False)
+            mensaje.usuario = request.user
+            mensaje.save()
+            return redirect(index)
+    else:
+        formulario = MensajeForm()
+    diccionario = {'formulario': formulario}
+    return render(request, 'crear_mensaje.html', diccionario)
