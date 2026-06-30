@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django import forms
 
 from administrativo.models import Estudiante, \
-        NumeroTelefonico
+        NumeroTelefonico, Mensaje
 
 class EstudianteForm(ModelForm):
     class Meta:
@@ -69,3 +69,25 @@ class NumeroTelefonicoEstudianteForm(ModelForm):
             'telefono': _('Ingrese telefono por favor'),
             'tipo': _('Ingrese tipo por favor'),
         }
+
+class MensajeForms(ModelForm):
+    class Meta:
+        model = Mensaje
+        fields = ['username', 'email', 'mensaje']
+        labels = {
+            'username': _('Ingrese su nombre de usuario por favor'),
+            'email': _('Ingrese su correo electronico por favor'),
+            'mensaje': _('Ingrese su mensaje por favor'),
+        }
+
+
+    def clean_mensaje(self):
+        valor = self.cleaned_data['mensaje']
+        num_caracteres = len(valor)
+
+        if num_caracteres < 25:
+            raise forms.ValidationError(
+                "Ingrese un mensaje que supere los 25 caracteres."
+            )
+
+        return valor 
